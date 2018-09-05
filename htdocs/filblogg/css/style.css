@@ -1,0 +1,25 @@
+/* Enkel CSS-reset */
+html {
+    box-sizing: border-box;
+}
+/* prettier-ignore */
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+/* prettier-ignore */
+body, h1, h2, h3, h4, h5, h6, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 800px;
+    margin: 50px auto; 
+    padding: 20px;
+}
+
+main p {
+    background-color: #000062;
+    padding: 20px; 
+    border-radius: 15px;    
+}

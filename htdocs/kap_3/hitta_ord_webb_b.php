@@ -11,22 +11,34 @@
 <body>
     <?php
 
-$url = $_POST["url"];
-$sordet = $_POST["sordet"];
-/* Läs in webbsidan */
-$innehall = file_get_contents($url); 
-$antal = 0; 
-$pos = 0; 
+$url = $_POST["url"]; 
+$sordet = $_POST["sordet"]; 
+$nordet = $_POST["nordet"];
 
-while ($pos != false) {
+/* Läs in webbsidan */
+$gamlasida = file_get_contents($url); 
+$nyasida = "";
+$antal = -1; 
+$start = 0; 
+$slut = 1; 
+
+while ($slut != false) {
     /* Hitta första ordet */
-    $pos = stripos($innehall, $sordet, $pos + 1);
-    echo "<p>$pos</p>"; /* Debugg */
+    $slut = stripos($gamlasida, $sordet, $start + 1);
+
+    /* Plocka ut textdelen framför hittade ordet */
+    $nyasida = substr("$gamlasida", $start, $slut ) . $nordet; 
+    $start = $slut + strlen($sordet);
+    
     $antal++; 
 }
+file_put_contents("text.html", $nyasida);
+
+
+
 
 /* Skriv ut resultat */
-echo "<p>Vi har hittat på $antal gånger i webbsidan.</p>";
+echo "<p>Vi har hittat $antal gånger i webbsidan.</p>";
 
 ?>
 </body>

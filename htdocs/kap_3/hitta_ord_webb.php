@@ -10,10 +10,12 @@
 
 <body>
     <form action="hitta_ord_webb_b.php" method="post">
-        <label for="">url: </label>
+        <label for="Rutas">url: </label>
         <input type="text" name="url"><br>
-        <label for="">Ordet:</label>
+        <label for="">Sök ord:</label>
         <input type="text" name="sordet"><br>
+        <label for="">Nytt ordt:</label>
+        <input type="text" name="nordet"><br>
         <button>Hitta ord</button>
 
 

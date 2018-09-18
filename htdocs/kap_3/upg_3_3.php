@@ -4,27 +4,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inloggning</title>
+    <title>Heltal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <?php 
-
 if (isset($_GET["fel"])) {
     $fel = $_GET["fel"];
     if ($fel == 1) {
-        echo "<p>FEL, testa igen.</p>";
+        echo "<p>FEL! Tal 1 måste vara mindre en tal 2.</p>";
     }
 }
+
 ?>
-    <p>Logga in</p>
+    <p>Sätt in 2 olika Heltal</p>
     <form action="#" method="post">
-        <label for="">Användarnamn</label>
-        <input type="text" name="anvandarnamn"><br>
-        <label for="">Lösenord</label>
-        <input type="password" name="losenord"><br>
-        <button>Logga in</button></form>
+        <label for="">heltal 1</label>
+        <input type="text" name="heltal1"><br>
+        <label for="">Heltal 2</label>
+        <input type="text" name="heltal2"><br>
+        <button>Testa</button></form>
 </body>
 
 </html>

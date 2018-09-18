@@ -9,16 +9,17 @@
 </head>
 
 <body>
-    <?php $anvandarnamn=$_POST["anvandarnamn"];
-$losenord=$_POST["losenord"];
+    <?php 
+$heltal1=$_POST["heltal1"];
+$heltal2=$_POST["heltal2"];
 
-if ($anvandarnamn=="vincent"&& $losenord=="123") {
-    echo "<p>$anvandarnamn , du är inloggad!</p>";
+if ($heltal1 < $heltal2) {
+    for ($i=$heltal1 + 1; $i < $heltal2; $i++) { 
+        echo "$i "; 
+    }
 }
-
 else { 
-    header("Location: upg_3_2.php?fel=1");
-    die();
+    header("Location: upg_3_3.php?fel=1"); 
 }
 
 

@@ -11,12 +11,17 @@
 <body>
     <?php 
 
-if (isset($_GET["fel"])) {
-    $fel = $_GET["fel"];
-    if ($fel == 1) {
+if (isset($_POST["anvandarnamn"]) && isset($_POST["losenord"])){
+    $anvandarnamn=$_POST["anvandarnamn"];
+    $losenord=$_POST["losenord"];
+    
+    if ($anvandarnamn=="vincent"&& $losenord=="123") {
+        echo "<p>$anvandarnamn , du är inloggad!</p>";
+    } else {
         echo "<p>FEL, testa igen.</p>";
     }
 }
+
 ?>
     <p>Logga in</p>
     <form action="#" method="post">

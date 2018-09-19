@@ -17,28 +17,11 @@ $nordet = $_POST["nordet"];
 
 /* Läs in webbsidan */
 $gamlasida = file_get_contents($url); 
-$nyasida = "";
-$antal = -1; 
-$start = 0; 
-$slut = 1; 
 
-while ($slut != false) {
-    /* Hitta första ordet */
-    $slut = stripos($gamlasida, $sordet, $start + 1);
 
-    /* Plocka ut textdelen framför hittade ordet */
-    $nyasida = substr("$gamlasida", $start, $slut ) . $nordet; 
-    $start = $slut + strlen($sordet);
-    
-    $antal++; 
-}
+$nyasida = str_replace($sordet, $nordet, $gamlasida); 
+
 file_put_contents("text.html", $nyasida);
-
-
-
-
-/* Skriv ut resultat */
-echo "<p>Vi har hittat $antal gånger i webbsidan.</p>";
 
 ?>
 </body>

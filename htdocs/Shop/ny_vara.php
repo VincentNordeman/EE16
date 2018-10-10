@@ -14,39 +14,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Filuppladdning</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.0/dist/mini-default.min.css">
 </head>
 
 <body>
 <?php
 /* Kolla att man har klickat på knappen "Submit" */
 if (isset($_POST["submit"])) {
+    /* Ta emot data */
     $fil = $_FILES["fil"];
-    print_r($fil);
+    $beskrivning = $_POST["beskrivning"];
+    $pris = $_POST["pris"];
     
+    /* Ladda upp bilden */    
+
     /* Plocka ut filnamnet */
     $filNamn = $fil["name"];
-    echo "<p>Filens namn är $filNamn </p>";
     
     /* Filtyp */
-    $filTyp = $fil["type"];
-    echo "<p>Filens typ är $filTyp </p>";
-    
+    $filTyp = $fil["type"];    
     /* Temporära namn */
     $fileTempName = $fil["tmp_name"];
-    echo "<p>Filens temporära namn är $fileTempName </p>";
     
     /* Storlek på filen */
     $filStorlek = $fil["size"];
-    echo "<p>Filens storlek är $filStorlek </p>";
     
     /* Error meddelande */
     $filError = $fil["error"];
-    echo "<p>Filens felmeddelande är $filError </p>";
     
     /* Filens ändelse */
     $filExt = explode ("image/" , $filTyp);
-    echo "<p>Filens filändelse är $filExt[1]</p>";
     
     /* Tillåtna filtyper */
     $tillåtnaTyper = ["jpeg" , "png" , "gif" , "pdf"];
@@ -65,7 +63,6 @@ if (isset($_POST["submit"])) {
     
     /* Är filen tillåten att ladda upp */
     if (in_array($filExt[1], $tillåtnaTyper)) {
-        echo "<p>Tillåten filtyp</p>";
         
         /* Meddelande om det blir fel */
         if ($filError == 0) {
@@ -74,13 +71,11 @@ if (isset($_POST["submit"])) {
             $filNyttNamn = uniqid("", true). ".". $filExt[1];
             
             /* Hela sökvägen till den nya filen */
-            $filDestination = "./bilder/filNyttNamn";
-            echo "<p>$filDestination</p>";
+            $filDestination = "./varor/$filNyttNamn";
             move_uploaded_file($fileTempName, $filDestination);
-            echo "<p>Filen uppladdad</p>";
+            echo "<p>Uppladdningen lyckades</p>";
             
             /* Hoppa till formulärat */
-            header("Location:filuppladdning.php?success");
             
         } else {
             echo "<p>Något gick fel: $errorMeddelanden[$filError]</p>";
@@ -88,9 +83,17 @@ if (isset($_POST["submit"])) {
     } else {
         echo "<p>Inte tillåten fil</p>";
     }
+    /* Uppladdning klart */
+
+    /* SPara texten: beskrivning, pris och bildens nya namn */
+    $handtag = fopen("beskrivning.txt", "a");
+    fwrite($handtag, $beskrivning . $pris . $filNyttNamn);
+    fclose($handtag);
 }
 ?>
     <form action="#" method="POST" enctype="multipart/form-data">
+        <label>Beskrivning</label><input type="text" name="beskrivning"><br>
+        <label for="">Pris</label><input type="text" name="pris"><br>
         <input type="file" name="fil">
         <button type="submit" name="submit">Ladda upp</button>
     </form>

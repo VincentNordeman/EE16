@@ -1,50 +1,50 @@
-<?php
-/*
-* Ladda upp filer. 
-* PHP version 7
-* @category   Filuppladdning
-* @author     Vincent Nordeman
-* @license    PHP CC
-*/
-?>
-<!DOCTYPE html>
-<html lang="sv">
+    <?php
+    /*
+    * Ladda upp filer. 
+    * PHP version 7
+    * @category   Filuppladdning
+    * @author     Vincent Nordeman
+    * @license    PHP CC
+    */
+    ?>
+    <!DOCTYPE html>
+    <html lang="sv">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Filuppladdning</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.0/dist/mini-default.min.css">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Filuppladdning</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.0/dist/mini-default.min.css">
+    </head>
 
-<body>
-<?php
-/* Kolla att man har klickat på knappen "Submit" */
-if (isset($_POST["submit"])) {
-    /* Ta emot data */
-    $fil = $_FILES["fil"];
-    $beskrivning = $_POST["beskrivning"];
-    $pris = $_POST["pris"];
-    
-    /* Ladda upp bilden */    
+    <body>
+    <?php
+    /* Kolla att man har klickat på knappen "Submit" */
+    if (isset($_POST["submit"])) {
+        /* Ta emot data */
+        $fil = $_FILES["fil"];
+        $beskrivning = $_POST["beskrivning"];
+        $pris = $_POST["pris"];
+        
+        /* Ladda upp bilden */    
 
-    /* Plocka ut filnamnet */
-    $filNamn = $fil["name"];
-    
-    /* Filtyp */
-    $filTyp = $fil["type"];    
-    /* Temporära namn */
-    $fileTempName = $fil["tmp_name"];
-    
-    /* Storlek på filen */
-    $filStorlek = $fil["size"];
-    
-    /* Error meddelande */
-    $filError = $fil["error"];
-    
-    /* Filens ändelse */
-    $filExt = explode ("image/" , $filTyp);
+        /* Plocka ut filnamnet */
+        $filNamn = $fil["name"];
+        
+        /* Filtyp */
+        $filTyp = $fil["type"];    
+        /* Temporära namn */
+        $fileTempName = $fil["tmp_name"];
+        
+        /* Storlek på filen */
+        $filStorlek = $fil["size"];
+        
+        /* Error meddelande */
+        $filError = $fil["error"];
+        
+        /* Filens ändelse */
+        $filExt = explode ("image/" , $filTyp);
     
     /* Tillåtna filtyper */
     $tillåtnaTyper = ["jpeg" , "png" , "gif" , "pdf"];
@@ -87,7 +87,7 @@ if (isset($_POST["submit"])) {
 
     /* SPara texten: beskrivning, pris och bildens nya namn */
     $handtag = fopen("beskrivning.txt", "a");
-    fwrite($handtag, $beskrivning . $pris . $filNyttNamn);
+    fwrite($handtag, $beskrivning . "¤" . $pris . "¤" . $filNyttNamn . PHP_EOL);
     fclose($handtag);
 }
 ?>

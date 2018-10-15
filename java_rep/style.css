@@ -1,0 +1,51 @@
+/* Enkel CSS-reset */
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+}
+
+.kontainer {
+    width: 350px;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 20px auto;
+}
+
+input {
+    width: 100px;
+    border-radius: 5px;
+}
+
+button {
+    background: turquoise;
+    color: white;
+    border-radius: 5px;
+}
+
+.svar {
+    background-color: blue;
+    border-radius: 5px;
+}

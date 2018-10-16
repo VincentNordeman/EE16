@@ -14,13 +14,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-    <link rel="stylesheet" href="./css/cyborg.epic.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div class="kontainer">
     <header>
         <h1>Alla varor</h1>
+        <div id="korgen">0kr</div>
     </header>
     <main>
         <?php
@@ -29,7 +30,6 @@
 $allaRader = file("beskrivning.txt");
 
 foreach ($allaRader as $rad) {
-    echo $rad . "<br>";
     
     /* Plocka isär raden i deras beståndsdelar */
     $delar = explode ("¤", $rad);
@@ -40,18 +40,28 @@ foreach ($allaRader as $rad) {
     echo "<div class=\"vara\">\n";
     echo "<img src=\"./varor/$bild\" alt=\"$beskrivning\">\n";
     echo "<p>$beskrivning</p>\n";
-    echo "<p>$pris</p>\n";
-    echo "<hr>\n";
-    echo "</div>\n";
+    echo "<p>Styckpris: <span id=\"pris\">$pris</span> kr</p>\n";
+    echo "<p>Summa: <span id=\"summa\"> $pris</span> kr </p>\n";
     
+    echo "<table>\n";
+    echo "<tr>\n";
+    echo "<td id=\"antal\" rowspan=\"2\">1</td>\n";
+    echo "<td id=\"plus\">+</td>\n";
+    echo "<td id=\"kop\"rowspan=\"2\">Köp</td>\n";
+    echo "</tr>\n";
+    echo "<tr>\n";
+    echo "<td id=\"minus\">-</td>\n ";
+    echo "</tr>\n";
+    echo "</table>\n";
     
+    echo "</div>\n"; 
 }   
 ?>
     </main>
     <footer>
         Vincent Nordeman
     </footer>
-
+</div>
+<script src="script.js"></script>
 </body>
-
 </html>

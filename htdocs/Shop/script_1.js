@@ -23,6 +23,8 @@ function start() {
     const elementPris = document.querySelector("#pris");
     console.log(elementPris);
 
+    const elementKorgen = document.querySelector("#korgen");
+    console.log(elementKorgen);
 
 
     /* Lyssna på händelser */
@@ -33,14 +35,14 @@ function start() {
     /* Räkna upp antal produker */
     function plus() {
         /* Läsa av antal och summa */
-        var antal = elementAntal.textContent;
-        var pris = elementPris.textContent;
+        var antal = parseInt(elementAntal.textContent);
+        var pris = parseInt(elementPris.textContent);
 
         /* Räkna upp */
         antal++;
-        
-        /* Räkna upp summa */
-        summa = pris * antal;
+
+        /* Räkna om summa */
+        var summa = pris * antal;
 
         /* Skriva tillbaka */
         elementAntal.textContent = antal;
@@ -51,22 +53,30 @@ function start() {
     function minus() {
         /* Läsa av antal */
 
-        var antal = elementAntal.textContent;
+        var antal = parseInt(elementAntal.textContent);
+        var pris = parseInt(elementPris.textContent);
         /* Räkna ned */
 
         if (antal > 1) {
             antal--;
         }
-        /* Skriva tillbaka */
+        /* Räkna om summa */
+      var summa = pris * antal;
 
+        /* Skriva tillbaka */
+        elementSumma.textContent = summa;
         elementAntal.textContent = antal;
     }
 
     function kop() {
         /* Läs av korgen */
-
+        var korgen = parseInt(elementKorgen.textContent);
+        var summa = parseInt(elementSumma.textContent);
         /* Addera antal * summa */
+        korgen = korgen + summa;
 
+        /* Skriv tillbaka */
+        elementKorgen.textContent = korgen;
     }
 
 }

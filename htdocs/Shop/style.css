@@ -34,7 +34,7 @@ body {
 .kontainer {
     width: 800px;
     padding: 30px;
-    background:black;
+    background: black;
     margin: 20px auto;
     border-radius: 5px;
     font-family: sans-serif;
@@ -62,7 +62,7 @@ main {
 .vara {
     font-family: sans-serif;
     font-size: 14px;
-    background:lightblue;
+    background: lightblue;
     padding: 20px;
     border-radius: 5px;
 }
@@ -82,25 +82,43 @@ table {
     font-weight: bold;
     cursor: pointer;
 }
-table, th, td {
+
+table,
+th,
+td {
     border: 1px solid #CCC;
 }
+
 table #kop {
     background: green;
     color: #FFF;
     width: 50%;
 }
+
 table #kop:hover {
     background: rgb(0, 80, 0);
 }
-table #plus:hover, table #minus:hover {
+
+table #plus:hover,
+table #minus:hover {
     background: #BBB;
 }
-#korgen{
+#antalvaror {
+    background: green;
+    border-radius: 100%;
+    margin-right: 100px;
+    padding: 5px;
+    color: white;
+}
+#korgen {
     width: 200px;
     border: 1px solid white;
     text-align: right;
     padding: 5px;
     border-radius: 5px;
     background: white;
+}
+
+#summa {
+    font-weight: bold;
 }

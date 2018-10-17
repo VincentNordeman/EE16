@@ -19,12 +19,15 @@
 
 <body>
     <div class="kontainer">
-    <header>
-        <h1>Alla varor</h1>
-        <div id="korgen">0kr</div>
-    </header>
-    <main>
-        <?php
+        <header>
+            <h1>Alla varor</h1>
+            <div id="korg">
+                <span id="antalvaror">0</span>
+                <span id="korgen">0</span>kr
+            </div>
+        </header>
+        <main>
+            <?php
 /* Öppna textfilen och läsa innehållet och skriv ut det */
 
 $allaRader = file("beskrivning.txt");
@@ -40,8 +43,8 @@ foreach ($allaRader as $rad) {
     echo "<div class=\"vara\">\n";
     echo "<img src=\"./varor/$bild\" alt=\"$beskrivning\">\n";
     echo "<p>$beskrivning</p>\n";
-    echo "<p>Styckpris: <span id=\"pris\">$pris</span> kr</p>\n";
-    echo "<p>Summa: <span id=\"summa\"> $pris</span> kr </p>\n";
+    echo "<p>Styckpris: <span id=\"pris\">$pris</span>kr</p>\n";
+    echo "<p>Summa: <span id=\"summa\">$pris</span>kr</p>\n";
     
     echo "<table>\n";
     echo "<tr>\n";
@@ -57,11 +60,12 @@ foreach ($allaRader as $rad) {
     echo "</div>\n"; 
 }   
 ?>
-    </main>
-    <footer>
-        Vincent Nordeman
-    </footer>
-</div>
-<script src="script.js"></script>
+        </main>
+        <footer>
+            Vincent Nordeman
+        </footer>
+    </div>
+    <script src="script_1.js"></script>
 </body>
+
 </html>

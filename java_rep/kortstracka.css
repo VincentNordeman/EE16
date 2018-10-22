@@ -1,0 +1,31 @@
+body {
+    background-size: 2000px;
+}
+.kontainer {
+    width: 30%;
+    margin: 100px auto;
+    padding: 50px;
+    background-color: rgba(207, 207, 207);
+    border-radius: 2px;
+}
+label {
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+}
+input {
+    width: 200px;
+    padding: 5px;
+    border-radius: 3px;
+}
+.svar {
+    background: white;
+    padding: 5px;
+    border-radius: 3px;
+}
+button {
+    width: 150px;
+    background: beige;
+    color: aqua;
+    font-weight: 50px;
+}

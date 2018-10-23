@@ -2,7 +2,13 @@
 window.onload = start;
 
 function start() {
-    /* Lyssna på alla knappar */
+
+    /* FÖr att lagra alla köpta varor */
+    var data = [];
+    const elementTotal = document.querySelector("#total");
+    const elementAntalVaror = document.querySelector("#antalVaror");
+
+    /* Lyssna på klick på hela sida */
     const elementKontainer = document.querySelector(".kontainer");
     elementKontainer.addEventListener("click", klick);
 
@@ -21,17 +27,18 @@ function start() {
 
         /* Leta lätt på närmast #antal */
         const foralder = cell.parentNode.parentNode.parentNode.parentNode;
+        const elementBeskrivning = foralder.querySelector("#beskrivning");
         const elementAntal = foralder.querySelector("#antal");
         const elementPris = foralder.querySelector("#pris");
         const elementSumma = foralder.querySelector("#summa");
         const elementKorgen = document.querySelector("#korgen");
-        const elementAntalVaror = document.querySelector("#antalVaror");
 
         var antal = parseInt(elementAntal.textContent);
+        var beskrivning = elementBeskrivning.textContent;
         var pris = parseInt(elementPris.textContent);
         var summa = parseInt(elementSumma.textContent);
-        var korgen = parseInt(elementKorgen.textContent);
-        var antalVaror = parseInt(elementAntalVaror.textContent);
+        var total = parseInt(elementTotal.value);
+        var antalVaror = parseInt(elementAntalVaror.value);
 
         /* Klickade man i cellen #plus */
         if (cell.id === "plus") {
@@ -63,14 +70,18 @@ function start() {
         /* Klickade man i cellen #kop */
         if (cell.id === "kop") {
             /* Addera antal *summa */
-            korgen = korgen + summa;
+            total = total + summa;
 
             /* Räkna upp totala antal varor */
             antalVaror = antalVaror + antal;
 
             /* Skriva tillbaka */
-            elementKorgen.textContent = korgen;
-            elementAntalVaror.textContent = antalVaror;
+            elementTotal.value = total  + "kr";
+            elementAntalVaror.value = antalVaror;
+
+            /* Spara undan korgen i den dolda input */
+            data.push({ "beskrivning": beskrivning, "antal": antal, "summa": summa });
+            elementKorgen.value = JSON.stringify(data);
         }
     }
 }

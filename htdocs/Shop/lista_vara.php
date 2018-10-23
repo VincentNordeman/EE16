@@ -21,10 +21,13 @@
     <div class="kontainer">
         <header>
             <h1>Alla varor</h1>
-            <div id="korg">
-                <span id="antalvaror">0</span>
-                <span id="korgen">0</span>kr
-            </div>
+            <form id="korg" method="post" action="kassa.php">
+                <input id="antalVaror" type="text" value="0" name="antalVaror">
+                <input id="total" type="text" value="0kr" name="total">
+                <input id="korgen" type="hidden" name="korgen">
+                <button id="kassan">Kassan</button>
+            </form>
+
         </header>
         <main>
             <?php
@@ -42,7 +45,7 @@ foreach ($allaRader as $rad) {
     
     echo "<div class=\"vara\">\n";
     echo "<img src=\"./varor/$bild\" alt=\"$beskrivning\">\n";
-    echo "<p>$beskrivning</p>\n";
+    echo "<p id=\"beskrivning\">$beskrivning</p>\n";
     echo "<p>Styckpris: <span id=\"pris\">$pris</span>kr</p>\n";
     echo "<p>Summa: <span id=\"summa\">$pris</span>kr</p>\n";
     
@@ -65,7 +68,7 @@ foreach ($allaRader as $rad) {
             Vincent Nordeman
         </footer>
     </div>
-    <script src="script_1.js"></script>
+    <script src="script_2.js"></script>
 </body>
 
 </html>

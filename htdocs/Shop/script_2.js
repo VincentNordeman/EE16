@@ -7,9 +7,28 @@ function start() {
     var data = [];
     const elementTotal = document.querySelector("#total");
     const elementAntalVaror = document.querySelector("#antalVaror");
+    const elementKassan = document.querySelector("#kassan");
+    const elementTom = document.querySelector("#tom");
+    const elementKontainer = document.querySelector(".kontainer");
+
+    /* Tom reset  */
+    elementAntalVaror.value = 0;
+    elementTotal.value = 0;
+    elementKassan.value = "";
+
+    /* Lyssna på klick på reset knappen */
+
+    elementTom.addEventListener("click", tom);
+
+    /* Töm korgen */
+
+    function tom() {
+        elementKassan.disabled = true;
+        data = [];
+    }
 
     /* Lyssna på klick på hela sida */
-    const elementKontainer = document.querySelector(".kontainer");
+
     elementKontainer.addEventListener("click", klick);
 
     /* Vad händer om man klickat på sidan */
@@ -69,6 +88,9 @@ function start() {
         }
         /* Klickade man i cellen #kop */
         if (cell.id === "kop") {
+            /* Aktivera knappen kassa */
+            elementKassan.disabled = false;
+
             /* Addera antal *summa */
             total = total + summa;
 
@@ -76,11 +98,16 @@ function start() {
             antalVaror = antalVaror + antal;
 
             /* Skriva tillbaka */
-            elementTotal.value = total  + "kr";
+            elementTotal.value = total + "kr";
             elementAntalVaror.value = antalVaror;
 
             /* Spara undan korgen i den dolda input */
-            data.push({ "beskrivning": beskrivning, "antal": antal, "summa": summa, "pris": pris });
+            data.push({
+                "beskrivning": beskrivning,
+                "antal": antal,
+                "summa": summa,
+                "pris": pris
+            });
             elementKorgen.value = JSON.stringify(data);
         }
     }

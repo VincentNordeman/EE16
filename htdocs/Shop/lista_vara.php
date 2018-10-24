@@ -14,7 +14,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Köpa varor</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -23,11 +24,11 @@
         <header>
             <h1>Alla varor</h1>
             <form id="korg" method="post" action="kassa.php">
-                <input id="antalVaror" type="text" value="0" name="antalVaror">
-                <input id="total" type="text" value="0kr" name="total">
-                <input id="korgen" type="hidden" name="korgen">
-                <button class="fas fa-trash-alt" type="reset" value="Reset"></button>
-                <button id="kassan">Kassan</button>
+                <input id="antalVaror" type="text" value="0" name="antalVaror" readonly>
+                <input id="total" type="text" value="0kr" name="total" readonly>
+                <input id="korgen" type="hidden" name="korgen" readonly>
+                <button id="tom" class="fas fa-trash-alt" type="reset" value="Reset"></button>
+                <button id="kassan" disabled>Kassan</button>
             </form>
 
         </header>

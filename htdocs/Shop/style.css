@@ -94,6 +94,10 @@ footer {
     padding: 20px;
     border-radius: 5px;
 }
+
+.listaVara #kassan:disabled {
+    background: rgb(110, 110, 110);
+}
 .listaVara img {
     height: 200px;
     padding: 20px;

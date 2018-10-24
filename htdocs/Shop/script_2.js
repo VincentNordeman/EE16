@@ -80,7 +80,7 @@ function start() {
             elementAntalVaror.value = antalVaror;
 
             /* Spara undan korgen i den dolda input */
-            data.push({ "beskrivning": beskrivning, "antal": antal, "summa": summa });
+            data.push({ "beskrivning": beskrivning, "antal": antal, "summa": summa, "pris": pris });
             elementKorgen.value = JSON.stringify(data);
         }
     }

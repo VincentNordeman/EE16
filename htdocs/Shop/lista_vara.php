@@ -1,4 +1,7 @@
 <?php
+session_start();
+?>
+<?php
 /*
 * Läsa in alla varor och skapa en lista med alla varor  
 * PHP version 7
@@ -22,7 +25,20 @@
 <body>
     <div class="kontainer listaVara">
         <header>
-            <h1>Alla varor</h1>
+            <h1>Shoppen</h1>
+            <nav>
+                <?php
+if (!isset($_SESSION["andv"])){
+    echo  "<a href=\"./login.php\">Logga in</a>";
+} else {
+    echo "<a href=\"./logout.php\">Logga ut</a>";
+}
+
+?>
+                <a href="./ny_vara.php">Ny vara</a>
+                <a href="./lista_vara.php">Handla</a>
+            </nav>
+            <h2>Alla varor</h2>
             <form id="korg" method="post" action="kassa.php">
                 <input id="antalVaror" type="text" value="0" name="antalVaror" readonly>
                 <input id="total" type="text" value="0kr" name="total" readonly>
@@ -36,12 +52,18 @@
             <?php
 /* Öppna textfilen och läsa innehållet och skriv ut det */
 
-$allaRader = file("beskrivning.txt");
+$allaRader = file("beskrivning.txt",  FILE_IGNORE_NEW_LINES |
+FILE_SKIP_EMPTY_LINES);
 
 foreach ($allaRader as $rad) {
     
     /* Plocka isär raden i deras beståndsdelar */
     $delar = explode ("¤", $rad);
+    if (sizeof($delar) !=3){
+        /* Om raden inte innehåller tre delar, hoppa över den. */
+        continue;
+    }
+
     $beskrivning = $delar[0];
     $pris = $delar[1];
     $bild = $delar[2];

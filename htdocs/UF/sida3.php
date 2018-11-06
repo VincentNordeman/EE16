@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DOT Apparel</title>
+    <title>DOT Apparel Varukorg</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,11 +16,6 @@
         </header>
     </div>
 
-    <div class="maindiv">
-        <div class="bildgrid">
-            <img src="./bilder/image1.png" alt="Tröja">
-        </div>
-    </div>
 
     <footer>
         <div class="grid">

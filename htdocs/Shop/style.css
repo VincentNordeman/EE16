@@ -4,10 +4,22 @@
 html {
     box-sizing: border-box;
 }
-*, *:before, *:after {
+
+*,
+*:before,
+*:after {
     box-sizing: inherit;
 }
-body, h1, h2, h3, h4, h5, h6, p, ul {
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
     margin: 0;
     padding: 0;
 }
@@ -17,6 +29,7 @@ body {
     background: url(https://cdn4.matsmart.se/sites/all/themes/retailshop/images/bg.jpg);
     background-attachment: fixed;
 }
+
 .kontainer {
     width: 800px;
     padding: 30px;
@@ -25,17 +38,43 @@ body {
     border-radius: 5px;
     font-family: sans-serif;
 }
+
 header {
     padding: 20px 0;
+    position: sticky;
+    top: 0;
+    background: #ddd;
 }
+
 h1 {
     font-size: 25px;
 }
+
+nav {
+    background: rgb(226, 169, 169);
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: 250px;
+}
+
+nav a {
+    color: green;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+nav a:hover {
+    color: greenyellow;
+}
+
 label {
     width: 150px;
     display: inline-block;
     margin-bottom: 10px;
 }
+
 input {
     width: 150px;
     display: inline-block;
@@ -45,6 +84,7 @@ input {
     border-radius: 5px;
     background: #FFF;
 }
+
 button {
     height: 25px;
     background: green;
@@ -52,6 +92,7 @@ button {
     border: none;
     border-radius: 3px;
 }
+
 footer {
     font-size: 12px;
     color: #666;
@@ -64,14 +105,17 @@ footer {
     grid-template-columns: auto auto;
     justify-content: space-between;
 }
+
 .listaVara main {
     display: grid;
     grid-template-columns: auto auto auto;
     grid-gap: 10px;
 }
+
 .listaVara #korg {
     text-align: right;
 }
+
 .listaVara #antalVaror {
     width: 25px;
     height: 25px;
@@ -87,6 +131,7 @@ footer {
     background: red;
     border-radius: 5px;
 }
+
 .listaVara .vara {
     font-family: sans-serif;
     font-size: 14px;
@@ -98,41 +143,54 @@ footer {
 .listaVara #kassan:disabled {
     background: rgb(110, 110, 110);
 }
+
 .listaVara img {
     height: 200px;
     padding: 20px;
 }
+
 .listaVara #summa {
     font-weight: bold;
     color: red;
 }
+
 .listaVara table {
     width: 100%;
     background: #EEE;
     border-collapse: collapse;
     margin-top: 20px;
 }
+
 .listaVara table.kontroll {
     text-align: center;
     vertical-align: middle;
     font-weight: bold;
     cursor: pointer;
 }
-.listaVara table, th, td {
+
+.listaVara table,
+th,
+td {
     border: 1px solid #CCC;
 }
-.listaVara table #antal, table #plus {
+
+.listaVara table #antal,
+table #plus {
     width: 25%;
 }
+
 .listaVara table #kop {
     background: green;
     color: #FFF;
     width: 50%;
 }
+
 .listaVara table #kop:hover {
     background: rgb(0, 80, 0);
 }
-.listaVara table #plus:hover, table #minus:hover {
+
+.listaVara table #plus:hover,
+table #minus:hover {
     background: #BBB;
 }
 
@@ -146,18 +204,21 @@ footer {
     background: #888;
     border-radius: 5px;
 }
-.nyVara input[type="file"] {
-    display: none;
+
+.nyVara header {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
 }
 
 /* Style för kassa.php */
 .kassa table {
     width: 100%;
-    border-collapse:collapse;
+    border-collapse: collapse;
 }
 
 .kassa th {
-    text-align:left;
+    text-align: left;
     padding: 5px;
     border: none;
 }

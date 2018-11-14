@@ -31,8 +31,8 @@ session_start();
     <?php 
 
 if (isset($_POST["anvandarnamn"]) && isset($_POST["losenord"])){
-    $anvandarnamn=$_POST["anvandarnamn"];
-    $losenord=$_POST["losenord"];
+    $anvandarnamn = filter_input(INPUT_POST, "anvandarnamn", FILTER_SANITIZE_STRING);
+    $losenord = filter_input(INPUT_POST, "losenord", FILTER_SANITIZE_STRING);
     
     if ($anvandarnamn=="vincent"&& $losenord=="123") {
         $_SESSION["andv"] = "vincent";

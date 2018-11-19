@@ -15,6 +15,7 @@ function start() {
     const eleHarvey = document.querySelector("#Harvey");
     const eleKerensa = document.querySelector("#Kerensa");
     const eleShifaaz = document.querySelector("#Shifaaz");
+    const eleBildtext = document.querySelector(".bildtext");
 
     /* Vilka händelser behöver vi lyssna på? */
     eleDavid.addEventListener("click", visaDavid);
@@ -24,15 +25,22 @@ function start() {
 
     /* Vad ska hända när man klickat på knapp1? */
     function visaDavid() {
-        eleImg.src ="./bilder/david-von-diemar-1118935-unsplash.jpg";
+        eleImg.src = "./bilder/david-von-diemar-1118935-unsplash.jpg";
+        eleBildtext.textContent = "Photo by David on Unsplash";
     }
+
     function visaHarvey() {
-        eleImg.src ="./bilder/harvey-enrile-1132518-unsplash.jpg";
+        eleImg.src = "./bilder/harvey-enrile-1132518-unsplash.jpg";
+        eleBildtext.textContent = "Photo by Harvey on Unsplash";
     }
+
     function visaKerensa() {
-        eleImg.src ="./bilder/kerensa-pickett-1132519-unsplash.jpg";
+        eleImg.src = "./bilder/kerensa-pickett-1132519-unsplash.jpg";
+        eleBildtext.textContent = "Photo by Kerensa on Unsplash";
     }
+
     function visaShifaaz() {
-        eleImg.src ="./bilder/shifaaz-shamoon-1113392-unsplash.jpg";
+        eleImg.src = "./bilder/shifaaz-shamoon-1113392-unsplash.jpg";
+        eleBildtext.textContent = "Photo by Shifaaz on Unsplash";
     }
 }

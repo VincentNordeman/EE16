@@ -55,67 +55,67 @@ if (isset($_POST["submit"])) {
     
     if ($filen && $beskrivning && $pris){
         
-         /* Ladda upp bilden */    
-    /* Plocka ut filnamnet */
-    $filNamn = $fil["name"];
-    
-    /* Filtyp */
-    $filTyp = $fil["type"];    
-    /* Temporära namn */
-    $fileTempName = $fil["tmp_name"];
-    
-    /* Storlek på filen */
-    $filStorlek = $fil["size"];
-    
-    /* Error meddelande */
-    $filError = $fil["error"];
-    
-    /* Filens ändelse */
-    $filExt = explode ("image/" , $filTyp);
-    
-    /* Tillåtna filtyper */
-    $tillåtnaTyper = ["jpeg" , "png" , "gif" , "pdf"];
-    
-    /* Felmeddelanden */
-    $errorMeddelanden = array (
-        0 => 'There is no error, the file uploaded with success.',
-        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
-        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.',
-        3 => 'The uploaded file was only partially uploaded.',
-        4 => 'No file was uploaded.',
-        6 => 'Missing a temporary folder.',
-        7 => 'Failed to write file to disk.',
-        8 => 'A PHP extension stopped the file upload.'
-    );
-    
-    /* Är filen tillåten att ladda upp */
-    if (in_array($filExt[1], $tillåtnaTyper)) {
+        /* Ladda upp bilden */    
+        /* Plocka ut filnamnet */
+        $filNamn = $fil["name"];
         
-        /* Meddelande om det blir fel */
-        if ($filError == 0) {
+        /* Filtyp */
+        $filTyp = $fil["type"];    
+        /* Temporära namn */
+        $fileTempName = $fil["tmp_name"];
+        
+        /* Storlek på filen */
+        $filStorlek = $fil["size"];
+        
+        /* Error meddelande */
+        $filError = $fil["error"];
+        
+        /* Filens ändelse */
+        $filExt = explode ("image/" , $filTyp);
+        
+        /* Tillåtna filtyper */
+        $tillåtnaTyper = ["jpeg" , "png" , "gif" , "pdf"];
+        
+        /* Felmeddelanden */
+        $errorMeddelanden = array (
+            0 => 'There is no error, the file uploaded with success.',
+            1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
+            2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.',
+            3 => 'The uploaded file was only partially uploaded.',
+            4 => 'No file was uploaded.',
+            6 => 'Missing a temporary folder.',
+            7 => 'Failed to write file to disk.',
+            8 => 'A PHP extension stopped the file upload.'
+        );
+        
+        /* Är filen tillåten att ladda upp */
+        if (in_array($filExt[1], $tillåtnaTyper)) {
             
-            /* Ny unikt filnamn för att inte skriva över filer med samma namn */
-            $filNyttNamn = uniqid("", true). ".". $filExt[1];
-            
-            /* Hela sökvägen till den nya filen */
-            $filDestination = "./varor/$filNyttNamn";
-            move_uploaded_file($fileTempName, $filDestination);
-            echo "<p>Uppladdningen lyckades</p>";
-            
-            /* Hoppa till formulärat */
-            
+            /* Meddelande om det blir fel */
+            if ($filError == 0) {
+                
+                /* Ny unikt filnamn för att inte skriva över filer med samma namn */
+                $filNyttNamn = uniqid("", true). ".". $filExt[1];
+                
+                /* Hela sökvägen till den nya filen */
+                $filDestination = "./varor/$filNyttNamn";
+                move_uploaded_file($fileTempName, $filDestination);
+                echo "<p>Uppladdningen lyckades</p>";
+                
+                /* Hoppa till formulärat */
+                
+            } else {
+                echo "<p>Något gick fel: $errorMeddelanden[$filError]</p>";
+            }
         } else {
-            echo "<p>Något gick fel: $errorMeddelanden[$filError]</p>";
+            echo "<p>Inte tillåten fil</p>";
         }
-    } else {
-        echo "<p>Inte tillåten fil</p>";
-    }
-    /* Uppladdning klart */
-    
-    /* SPara texten: beskrivning, pris och bildens nya namn */
-    $handtag = fopen("beskrivning.txt", "a");
-    fwrite($handtag, $beskrivning . "¤" . $pris . "¤" . $filNyttNamn . PHP_EOL);
-    fclose($handtag);
+        /* Uppladdning klart */
+        
+        /* Spara texten: beskrivning, pris och bildens nya namn */
+        $handtag = fopen("beskrivning.txt", "a");
+        fwrite($handtag, $beskrivning . "¤" . $pris . "¤" . $filNyttNamn . PHP_EOL);
+        fclose($handtag);
     } else {
         echo "<p>Fyll i alla fält</p>";
     }   

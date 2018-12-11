@@ -23,8 +23,6 @@ echo "<p>Hej: " . substr($hello, 3). "</p>";
 echo "<p>på:" . substr($hello, 4, 2). "</p>";
 echo "<p>dig: " . substr($hello, 7, 3). "</p>";
 
-}
-
 ?>    
 </body>
 </html>

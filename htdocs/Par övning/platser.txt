@@ -1,0 +1,6 @@
+<p>18.0745,59.3851,
+Plats:
+</p>
+<p>18.0655,59.3599,
+Plats:Somewhererewere
+</p>

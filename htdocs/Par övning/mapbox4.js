@@ -1,11 +1,10 @@
 window.onload = start;
 
 function start() {
-    const eListaKoordinater = document.querySelector(".Koordinater");
-    const eListaBeskrivning = document.querySelector(".beskrivning");
-    const eBox = document.querySelector(".box");
+    const eLista = document.querySelector(".platser");
     const eKnapp = document.querySelector("button");
-    const url = "spara.php";
+    let url = "./spara4.php";
+    let index = 0;
 
     mapboxgl.accessToken = 'pk.eyJ1IjoidmluY2VudG5vcmRlbWFuIiwiYSI6ImNqcGpvZDFmYTA4Ym0zcHFkMTQ0ZGtxM3YifQ.h6k8Y7CGTDvNoGwEKwNUyA';
     let map = new mapboxgl.Map({
@@ -22,31 +21,35 @@ function start() {
             .setLngLat(e.lngLat)
             .addTo(map);
 
-        console.log(e.lngLat);
-
         /* Lägg till en ny rad i tabellen för varje click */
-        eListaKoordinater.textContent += e.lngLat.lng.toFixed(4) + "," + e.lngLat.lat.toFixed(4) + ",\n";
-        eListaBeskrivning.textContent += "Plats:" + "\n";
+        eLista.innerHTML += "<input name=\"koordinater[]\" type=\"text\" value=\"" + rund(e.lngLat.lng) + "," + rund(e.lngLat.lat) + "\"><input name=\"beskrivningar[]\" type=\"text\" value=\"Beskrivning\">";
     }
-
     /* Vid klick på Spara-knappen skicka data till PHP-skript */
     eKnapp.addEventListener("click", spara);
 
     function spara() {
-        /* Skicka ajax-anrop till webbtjänsten */
+        /* Skicka ajax-anrop till webbtjänsten*/
         let ajax = new XMLHttpRequest();
         ajax.addEventListener("loadend", sparaPlatser);
+
         function sparaPlatser() {
-            console.log(this.responseText);
+            if (this.responseText == "Klart") {
+                alert("Platserna sparades i filen.")
+            } else {
+                alert("Något gick fel.");
+            }
         }
         ajax.open("POST", url, true);
 
-        //Läs av formulärets inehåll// 
-        let formData = new FormData();
-        formData.append("coordinates", eListaKoordinater.value);
-        formData.append("beskrivning", eListaBeskrivning.value);
+        /* Läs av formulärets innehåll */
+        let formData = new FormData(eLista);
 
         /* Nu, skicka data */
         ajax.send(formData);
+    }
+
+    /* Runda av decimaler */
+    function rund(tal) {
+        return tal.toFixed(5);
     }
 }

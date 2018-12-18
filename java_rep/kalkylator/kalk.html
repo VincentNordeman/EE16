@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Miniräknare</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form>
+        <label>Tal 1</label>
+        <input type="text" id="tal1"><br>
+        <label>Tal 2</label>
+        <input type="text" id="tal2"><br>
+        <select id="valj">
+            <option value="plus">Plus</option>
+            <option value="minus">Minus</option>
+            <option value="div">Dividera</option>
+            <option value="ggr">Gånger</option>
+        </select>
+        <button type="button" onclick="start()">Räkna ut</button>
+     <div id="resultat"></div>
+    </form>
+
+</body>
+<script src="kalk.js"></script>
+
+</html>

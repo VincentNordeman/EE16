@@ -1,10 +1,10 @@
 <?php
-if (isset($_POST["coordinates"]) && isset($_POST["beskrivning"])) {
-    $coordinates = filter_input(INPUT_POST, 'coordinates' , FILTER_SANITIZE_STRING); 
+if (isset($_POST["Koordinater"]) && isset($_POST["beskrivning"])) {
+    $Koordinater = filter_input(INPUT_POST, 'Koordinater' , FILTER_SANITIZE_STRING); 
     $beskrivning = filter_input(INPUT_POST, 'beskrivning' , FILTER_SANITIZE_STRING); 
 
     $handtag = fopen ("platser.txt", "a");
-    fwrite($handtag, "<p>" . $coordinates . $beskrivning . "</p>\n");
+    fwrite($handtag, "<p>" . $Koordinater . $beskrivning . "</p>\n");
     
     fclose($handtag);
     echo "SPARAD";

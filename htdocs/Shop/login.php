@@ -16,13 +16,13 @@ session_start();
     <header>
         <h1>Shoppen</h1>
         <nav>
-        <?php
-    if (!isset($_SESSION["andv"])){
-        echo  "<a href=\"./login.php\">Logga in</a>";
-    } else {
-        echo "<a href=\"./logout.php\">Logga ut</a>";
-    }
-    ?>
+            <?php
+if (!isset($_SESSION["andv"])){
+    echo  "<a href=\"./login.php\">Logga in</a>";
+} else {
+    echo "<a href=\"./logout.php\">Logga ut</a>";
+}
+?>
             <a href="./ny_vara.php">Ny vara</a>
             <a href="./lista_vara.php">Handla</a>
         </nav>
@@ -34,12 +34,12 @@ if (isset($_POST["anvandarnamn"]) && isset($_POST["losenord"])){
     $anvandarnamn = filter_input(INPUT_POST, "anvandarnamn", FILTER_SANITIZE_STRING);
     $losenord = filter_input(INPUT_POST, "losenord", FILTER_SANITIZE_STRING);
     
-    if ($anvandarnamn=="vincent"&& $losenord=="123") {
+    if ($anvandarnamn=="vincent" && $losenord=="123") {
         $_SESSION["andv"] = "vincent";
         header("Location: ny_vara.php");
         exit;
     } 
-   echo $_SESSION["andv"];
+    echo $_SESSION["andv"];
 }
 
 ?>

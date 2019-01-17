@@ -1,0 +1,70 @@
+/* Enkel CSS-reset */
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: teal;
+}
+
+#kontainer {
+    background-color: cornflowerblue;
+    width: 600px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 3px;
+}
+
+label,
+input,
+button {
+    padding: 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+}
+
+td {
+    padding: 2px;
+}
+
+tr:nth-child(even) {
+    background: #CCC
+}
+
+tr:nth-child(odd) {
+    background: #FFF
+}

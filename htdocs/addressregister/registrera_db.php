@@ -32,9 +32,15 @@ if (isset($_POST["fnamn"]) && isset($_POST["enamn"]) && isset($_POST["gmail"])){
     
     /* Lagra data i tabellen */
     $sql = "INSERT INTO personer (fnamn, enamn, gmail) VALUES ('$fnamn', '$enamn', '$gmail');";
-    echo "<p>$sql</p>";
-    $conn->query($sql);
+    $result = $conn->query($sql);
 
+    /* Gick  cet bra? */
+    if (!$result) {
+        die("Det blev fel med sql satsen");
+    } else {
+        echo "<p>Du har registrerat en person</p>";
+    }
+    
     /* Stänger ned anslutningen  */
     $conn->close();
 }

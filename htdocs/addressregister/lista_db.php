@@ -1,5 +1,7 @@
 <?php
 include_once("../../admin/konfig_db.php");
+
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +16,12 @@ include_once("../../admin/konfig_db.php");
 
 <body>
     <div id="kontainer">
+        <h3>Lista alla personer</h3>
+        <nav>
+            <a href="logga_in_db.php">Logga in</a>
+            <a href="registrera_db.php">Registrera</a>
+            <a href="lista_db.php">Lista</a>
+        </nav>
         <?php
 
 /* Logga in på databasen */
@@ -23,7 +31,7 @@ $conn = new mysqli($hostname, $users, $passwords, $database);
 if ($conn->connect_error)
 die("Kunde inte ansluta till databasen" . $conn->connect_error);
 else{
-    echo "<p>Anslutningen lyckades</p>";
+   /*  echo "<p>Anslutningen lyckades</p>"; */
 } 
 
 /* Skapa sql frågan */
@@ -52,6 +60,11 @@ while($rad = $result->fetch_assoc()){
     echo "<td>{$rad['gmail']}</td>";
     echo "</tr>";
     
+    /* Skapa knapp för att radera raden */
+    echo "<td><a href=\"radera_verifera_db.php?id={$rad['id']}\">Radera</a></td>";
+    /* Skapa knapp för att redigera raden */
+    echo "<td><a href=\"redigera_db.php\">Redigera</a></td>";
+    
 }
 echo "</table>";
 
@@ -59,4 +72,5 @@ $conn->close();
 ?>
     </div>
 </body>
+
 </html>

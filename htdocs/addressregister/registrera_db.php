@@ -1,5 +1,7 @@
 <?php
 include_once("../../admin/konfig_db.php");
+
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -22,18 +24,18 @@ if (isset($_POST["fnamn"]) && isset($_POST["enamn"]) && isset($_POST["gmail"])){
     
     /* Logga in på databasen */
     $conn = new mysqli($hostname, $users, $passwords, $database);
-
+    
     /* Fungerar anslutningen */
     if ($conn->connect_error)
-        die("Kunde inte ansluta till databasen" . $conn->connect_error);
+    die("Kunde inte ansluta till databasen" . $conn->connect_error);
     else{
-        echo "<p>Anslutningen lyckades</p>";
+       /*  echo "<p>Anslutningen lyckades</p>"; */
     }
     
     /* Lagra data i tabellen */
     $sql = "INSERT INTO personer (fnamn, enamn, gmail) VALUES ('$fnamn', '$enamn', '$gmail');";
     $result = $conn->query($sql);
-
+    
     /* Gick  cet bra? */
     if (!$result) {
         die("Det blev fel med sql satsen");
@@ -46,8 +48,13 @@ if (isset($_POST["fnamn"]) && isset($_POST["enamn"]) && isset($_POST["gmail"])){
 }
 ?>
     <div id="kontainer">
+        <h3>Registrera</h3>
+        <nav>
+            <a href="logga_in_db.php">Logga in</a>
+            <a href="registrera_db.php">Registrera</a>
+            <a href="lista_db.php">Lista</a>
+        </nav>
         <form action="#" method="post">
-            <label for="fnamn">Förnamn</label>
             <input type="text" name="fnamn" id="fnamn">
             <label for="enamn">Efternamn</label>
             <input type="text" name="enamn" id="enamn">

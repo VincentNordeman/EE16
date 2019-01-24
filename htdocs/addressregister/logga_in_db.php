@@ -3,7 +3,6 @@ include_once("../../admin/konfig_db.php");
 
 session_start();
 ?>
-?>
 
 <!DOCTYPE html>
 <html lang="sv">
@@ -17,7 +16,7 @@ session_start();
 
 <body>
     <div class="kontainer">
-        <h3>inloggning</h3>
+        <h3>Inloggning</h3>
         <nav>
             <a href="logga_in_db.php">Logga in</a>
             <a href="registrera_db.php">Registrera</a>

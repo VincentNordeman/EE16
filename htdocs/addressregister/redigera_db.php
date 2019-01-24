@@ -16,11 +16,9 @@ session_start();
 
 <body>
     <?php
-if (isset($_POST["fnamn"]) && isset($_POST["enamn"]) && isset($_POST["gmail"])){
-    
-    $fnamn = filter_input(INPUT_POST, "fnamn", FILTER_SANITIZE_STRING);
-    $enamn = filter_input(INPUT_POST, "enamn", FILTER_SANITIZE_STRING);
-    $gmail = filter_input(INPUT_POST, "gmail", FILTER_SANITIZE_STRING);
+
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
     
     /* Logga in på databasen */
     $conn = new mysqli($hostname, $users, $passwords, $database);
@@ -32,35 +30,36 @@ if (isset($_POST["fnamn"]) && isset($_POST["enamn"]) && isset($_POST["gmail"])){
         /*  echo "<p>Anslutningen lyckades</p>"; */
     }
     
-    /* Lagra data i tabellen */
-    $sql = "INSERT INTO personer (fnamn, enamn, gmail) VALUES ('$fnamn', '$enamn', '$gmail');";
+    /* SQL-fråga för att hämta alla data om användaren */
+    $sql = "SELECT * FROM personer WHERE id = '$id'";
     $result = $conn->query($sql);
     
     /* Gick  cet bra? */
     if (!$result) {
         die("Det blev fel med sql satsen");
     } else {
-        echo "<p>Du har registrerat en person</p>";
+        $rad = $result->fetch_assoc();
+        /* $rad är en array med key:fnman, enamn, epost */
+        echo $rad['fnamn'] . " " . $rad['enamn'] . " " .  $rad['gmail'] . " ";
     }
     
-    /* Stänger ned anslutningen  */
-    $conn->close();
 }
 ?>
-    <div id="kontainer">
-        <h3>Registrera</h3>
+    <div class="kontainer">
+        <h3>Redigera</h3>
         <nav>
             <a href="logga_in_db.php">Logga in</a>
             <a href="registrera_db.php">Registrera</a>
             <a href="lista_db.php">Lista</a>
         </nav>
-        <form action="#" method="post">
-            <input type="text" name="fnamn" id="fnamn">
+        <form action="redigera_spara_db.php" method="post">
+            <input type="text" name="fnamn" value="<?php echo $rad['fnamn']?>">
             <label for="enamn">Efternamn</label>
-            <input type="text" name="enamn" id="enamn">
+            <input type="text" name="enamn" value="<?php echo $rad['enamn']?>">
             <label for="gmail">Gmail</label>
-            <input type="text" name="gmail" id="gmail">
-            <button>Registrera</button>
+            <input type="text" name="gmail" value="<?php echo $rad['gmail']?>">
+            <input type="hidden" name="id" value="<?php echo $rad['id']?>">
+            <button>Uppdatera</button>
         </form>
     </div>
 </body>

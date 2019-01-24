@@ -23,48 +23,61 @@ ul {
 }
 
 body {
-    background-color: teal;
+    background: #9db4b2;
 }
 
-#kontainer {
-    background-color: cornflowerblue;
+.kontainer {
+    background: #fff;
     width: 600px;
     margin: 100px auto;
-    padding: 20px;
-    border-radius: 20px;
+    padding: 30px;
+    border-radius: 10px;
+    font-family: sans-serif;
 }
 
 form {
     display: grid;
     grid-template-columns: auto auto;
-    grid-gap: 3px;
+    grid-gap: 20px;
 }
 
 label,
 input,
 button {
-    padding: 20px;
-    border: none;
-    border-radius: 5px;
+    padding: 10px;
+    border: 1p solid #888;
+    border-radius: 3px;
+}
+
+label {
+    text-align: right;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    border: 1px solid #DDD;
+    margin: 10px 0;
 }
 
-th {
+th,
+td {
+    padding: 5px;
     text-align: left;
 }
 
-td {
-    padding: 2px;
-}
-
 tr:nth-child(even) {
-    background: #CCC
+    background: #CCC;
 }
 
 tr:nth-child(odd) {
-    background: #FFF
+    background: #FFF;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ffffff;
 }

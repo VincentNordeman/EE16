@@ -36,7 +36,7 @@ if (isset($_POST["fnamn"]) && isset($_POST["enamn"]) && isset($_POST["gmail"])){
     $sql = "INSERT INTO personer (fnamn, enamn, gmail) VALUES ('$fnamn', '$enamn', '$gmail');";
     $result = $conn->query($sql);
     
-    /* Gick  cet bra? */
+    /* Gick  det bra? */
     if (!$result) {
         die("Det blev fel med sql satsen");
     } else {
@@ -47,7 +47,7 @@ if (isset($_POST["fnamn"]) && isset($_POST["enamn"]) && isset($_POST["gmail"])){
     $conn->close();
 }
 ?>
-    <div id="kontainer">
+    <div class="kontainer">
         <h3>Registrera</h3>
         <nav>
             <a href="logga_in_db.php">Logga in</a>

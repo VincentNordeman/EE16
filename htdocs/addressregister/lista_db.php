@@ -15,7 +15,7 @@ session_start();
 </head>
 
 <body>
-    <div id="kontainer">
+    <div class="kontainer">
         <h3>Lista alla personer</h3>
         <nav>
             <a href="logga_in_db.php">Logga in</a>

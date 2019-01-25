@@ -35,34 +35,24 @@ if (isset($_POST["anamn"]) && isset($_POST["losen"])){
     if ($conn->connect_error)
     die("Kunde inte ansluta till databasen" . $conn->connect_error);
     else{
-        echo "<p>Anslutningen lyckades</p>";
+        /* echo "<p>Anslutningen lyckades</p>"; */
     } 
 
-     /* Lagra data i tabellen */
+    $hash = password_hash($losen, PASSWORD_DEFAULT);
+
      /* Sql fråga */
-     $sql = "SELECT * FROM admin WHERE anamn = '$anamn';";
+     $sql = "INSERT INTO admin (anamn, hash) VALUES ('$anamn', '$hash')";
      $result = $conn->query($sql);
 
     /* Gick  det bra? */
     if (!$result) {
         die("Det blev fel med sql satsen");
     } else {
-       $rad = $result->fetch_assoc();
-       if (password_verify($losen, $rad['hash'])){
-           echo "<p>Inloggad</p>";
-       } else {
-           echo "<p>Fel lösenord</p>";                   
-       }
+       echo "<p>Admin registrerad</p>";
     }
     
     /* Stänger ned anslutningen  */
     $conn->close();
-
-    
-    /* Hämta användarens hash lösenord från databasen */
-
-    /* Kontrollerar om lösenord är ok */
-
     
 }
 ?>
@@ -71,7 +61,7 @@ if (isset($_POST["anamn"]) && isset($_POST["losen"])){
             <input type="text" name="anamn">
             <label for="">Lösenord</label>
             <input type="password" name="losen">
-            <button>Logga in</button></form>
+            <button>Registrera</button></form>
     </div>
 </body>
 

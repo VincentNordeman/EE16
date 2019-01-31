@@ -41,7 +41,7 @@ function start() {
         eP.innerHTML += spelare1 + " har " + hp1 + "HP" + ", " + spelare2 + " har " + hp2 + "HP" + "<br>";
 
         /* Vem har vunnit? */
-        if (hp1 <= 0 && hp2 > 0) {
+        if (hp1 < 0 && hp2 > 0) {
             eP.innerHTML += spelare2 + " har vunnit! ";
         } else {
             if (hp2 <= 0 && hp1 > 0) {

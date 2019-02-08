@@ -20,6 +20,9 @@ function start() {
         /* Rackets position */
         racketX = 350;
         racketY = 580;
+
+        antalKlossar = 0;
+        skapaAllaKlossar();
     }
 
     /* Boll */
@@ -121,7 +124,6 @@ function start() {
 
     /* Ange startvärde */
     reset();
-    skapaAllaKlossar();
 
     function gameloop() {
         /* Sudda bort allt */
@@ -145,13 +147,11 @@ function start() {
         }
 
         /* Bollen ska studsa på racket */
-        /* Kolla om bollen är nere på bottenkanten */
-        if (bollY >= 570) {
-            /* Kolla om bollen är nära racketen */
-            if ((bollX >= (racketX - 20)) && (bollX <= (racketX + 90))) {
-                vy = -vy;
-            }
+        if (((bollY + 20) >= racketY && ((bollY + 20) <= (racketY + 10))) &&
+            (bollX >= racketX && (bollX <= (racketX + 120)))) {
+            vy = -vy;
         }
+
         if (bollY >= 600) {
             alert("Game over");
             reset();
@@ -159,6 +159,7 @@ function start() {
 
         if (antalKlossar == 0) {
             alert("Grattis");
+            reset();
         }
 
         traffaKloss();

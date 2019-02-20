@@ -210,6 +210,7 @@ function start() {
         
         monster1();
         monster2();
+        
         highscore();
         ritaSpelare(spelare.x, spelare.y);
         ritaMonster(monster.x, monster.y);

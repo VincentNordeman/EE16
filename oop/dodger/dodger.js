@@ -5,45 +5,61 @@ function start() {
 
     const canvas = document.querySelector("#myCanvas");
     var ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
 
-    var bollX, bollY, monsterX, monsterY;
+    var points = 0,
+        lives = 3;
+    var boll = {
+        x: 0,
+        y: 0
+    };
     var keys = [];
-    var monster = [];
+    var monsters = [];
+
 
     var imgMonster = new Image();
     imgMonster.src = "./../bilder/IMG_20170903_220047_205.png";
 
     function reset() {
 
-        bollX = 400;
-        bollY = 500;
+        boll.x = 400;
+        boll.y = 500;
+    }
 
-        monsterX = 350;
-        monsterY = 50;
+    class Monster {
+        constructor() {
+            this.x = Math.ceil(Math.random() * 790);
+            this.y = 50;
+            this.v = Math.ceil(Math.random() * 3);
+            this.imgMonster = new Image();
+            this.imgMonster.src = "./../bilder/IMG_20170903_220047_205.png";
+        }
+
+        /* Monster  */
+        ritaMonster() {
+            ctx.beginPath();
+            ctx.drawImage(this.imgMonster, this.x, this.y, 50, 50);
+            ctx.closePath();
+        }
+
+        spawnaMonster() {
+            this.x = Math.ceil(Math.random() * 790);
+        }
+
+        fallaMonster() {
+            this.y += this.v;
+            this.ritaMonster(this.x);
+        }
+
     }
 
     /* Boll */
     function ritaBoll(x, y) {
         ctx.beginPath();
-        ctx.arc(x, y, 10, 0, Math.PI * 2, false)
+        ctx.arc(x, y, 8, 0, Math.PI * 2, false)
         ctx.fillStyle = "blue";
         ctx.fill();
         ctx.rect(100, 170, 300, 50);
         ctx.closePath();
-    }
-
-    /* Monster  */
-    function ritaMonster(x) {
-        ctx.beginPath();
-        ctx.drawImage(imgMonster, x, monsterY, 50, 50);
-        ctx.closePath();
-    }
-
-    function fallaMonster() {
-        monsterX = Math.ceil(Math.random() * 1400);
-        ritaMonster(monsterX);
     }
 
     /* Lyssna på piltangenterna */
@@ -59,24 +75,66 @@ function start() {
     }
 
     function uppdateraBoll() {
-        if (keys["ArrowLeft"] && bollX > 10) {
-            bollX -= 15;
+        if (keys["ArrowLeft"] && boll.x > 10) {
+            boll.x -= 10;
         }
-        if (keys["ArrowRight"] && bollX < 1510) {
-            bollX += 15;
+        if (keys["ArrowRight"] && boll.x < 790) {
+            boll.x += 10;
         }
     }
+
+    /* Poäng, liv utskrift */
+    function highscore(points, lives) {
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "red";
+        ctx.fillText("Time: " + points, 600, 50);
+        ctx.fillText("Liv: " + lives, 600, 100);
+    }
+
+    /* Poäng, liv och död */
+    function traff() {
+        for (var i = 0; i < monsters.length; i++) {
+            if ((monsters[i].x <= boll.x) && (boll.x <= monsters[i].x + 50) && (monsters[i].y <= boll.y) && (boll.y <= monsters[i].y + 50)) {
+                lives--;
+                reset();
+            } else {
+                if (lives == 0) {
+                    alert("Spelet är över!");
+                } else {
+                    points += 1;
+                }
+            }
+        }
+    }
+
 
     /* Ange startvärde */
     reset();
 
+    function monsterLager() {
+        for (var i = 0; i < 2; i++) {
+            var monster = new Monster();
+            monsters.push(monster);
+        }
+    }
+    setInterval(monsterLager, 500);
+    monsterLager();
+
     function gameloop() {
         /* Sudda bort allt */
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, 800, 600);
 
-        ritaBoll(bollX, bollY);
+        for (var i = 0; i < monsters.length; i++) {
+            if (monsters[i].y > 600) {
+                monsters.splice(i, 1);
+            } else {
+                monsters[i].fallaMonster();
+            }
+        }
 
-        fallaMonster();
+        ritaBoll(boll.x, boll.y);
+        traff();
+        highscore(points, lives);
         uppdateraBoll();
         requestAnimationFrame(gameloop);
     }

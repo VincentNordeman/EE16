@@ -27,3 +27,14 @@ canvas {
     display: block;
     margin: 50px auto;
 }
+
+button {
+    text-align: center;
+    height: 60px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font-size: 30px;
+}

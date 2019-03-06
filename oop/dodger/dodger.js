@@ -2,10 +2,13 @@ window.onload = start;
 
 function start() {
 
-
+    /* Hämta knapp info i html */
+    const easy = document.querySelector("#easy");
+    const hard = document.querySelector("#hard");
+    const insane = document.querySelector("#insane");
     const canvas = document.querySelector("#myCanvas");
-    var ctx = canvas.getContext("2d");
 
+    var ctx = canvas.getContext("2d");
     var points = 0,
         lives = 3;
     var boll = {
@@ -15,23 +18,43 @@ function start() {
     var keys = [];
     var monsters = [];
 
-
     var imgMonster = new Image();
-    imgMonster.src = "./../bilder/IMG_20170903_220047_205.png";
+    imgMonster.src = "./../bilder/Profile.jpg";
+
+    var interval = 0;
+    var startTid;
+    var speed = 500;
+
+    /* Lyssna på knapparna */
+    easy.addEventListener("click", nyttSpel);
+    hard.addEventListener("click", nyttSpel);
+    insane.addEventListener("click", nyttSpel);
+
+    function nyttSpel() {
+        reset();
+        speed = this.dataset.speed;
+
+        startTid = Date.now();
+        lives = 3;
+
+        clearInterval(interval);
+        interval = setInterval(monsterLager, speed);
+    }
 
     function reset() {
-
         boll.x = 400;
         boll.y = 500;
+
+        monsters = [];
     }
 
     class Monster {
         constructor() {
             this.x = Math.ceil(Math.random() * 790);
-            this.y = 50;
+            this.y = 0;
             this.v = Math.ceil(Math.random() * 3);
             this.imgMonster = new Image();
-            this.imgMonster.src = "./../bilder/IMG_20170903_220047_205.png";
+            this.imgMonster.src = "./../bilder/Profile.jpg";
         }
 
         /* Monster  */
@@ -41,6 +64,7 @@ function start() {
             ctx.closePath();
         }
 
+        /* Skapa monster på en linje mellan 0-790px */
         spawnaMonster() {
             this.x = Math.ceil(Math.random() * 790);
         }
@@ -52,7 +76,7 @@ function start() {
 
     }
 
-    /* Boll */
+    /* Rita boll */
     function ritaBoll(x, y) {
         ctx.beginPath();
         ctx.arc(x, y, 8, 0, Math.PI * 2, false)
@@ -74,6 +98,7 @@ function start() {
         keys[e.key] = false;
     }
 
+    /* Flyttar bollen höger och vänster */
     function uppdateraBoll() {
         if (keys["ArrowLeft"] && boll.x > 10) {
             boll.x -= 10;
@@ -83,15 +108,15 @@ function start() {
         }
     }
 
-    /* Poäng, liv utskrift */
+    /* Poäng/Tid & liv utskrift */
     function highscore(points, lives) {
         ctx.font = "20px Arial";
         ctx.fillStyle = "red";
-        ctx.fillText("Time: " + points, 600, 50);
-        ctx.fillText("Liv: " + lives, 600, 100);
+        ctx.fillText("Time: " + points + " Sec", 680, 20);
+        ctx.fillText("Live: " + lives, 687, 40);
     }
 
-    /* Poäng, liv och död */
+    /* Poäng/Tid, liv och död */
     function traff() {
         for (var i = 0; i < monsters.length; i++) {
             if ((monsters[i].x <= boll.x) && (boll.x <= monsters[i].x + 50) && (monsters[i].y <= boll.y) && (boll.y <= monsters[i].y + 50)) {
@@ -99,31 +124,32 @@ function start() {
                 reset();
             } else {
                 if (lives == 0) {
-                    alert("Spelet är över!");
+                    alert("You survived for " + points + " seconds");
                 } else {
-                    points += 1;
+                    var tid = Date.now();
+                    points = Math.ceil((tid - startTid) / 1000);
                 }
             }
         }
     }
 
-
-    /* Ange startvärde */
     reset();
 
+    /* Skapar monsters */
     function monsterLager() {
         for (var i = 0; i < 2; i++) {
             var monster = new Monster();
             monsters.push(monster);
         }
     }
-    setInterval(monsterLager, 500);
-    monsterLager();
+
+    interval = setInterval(monsterLager, speed);
 
     function gameloop() {
         /* Sudda bort allt */
         ctx.clearRect(0, 0, 800, 600);
 
+        /* Tar bort monster som nuddar botten */
         for (var i = 0; i < monsters.length; i++) {
             if (monsters[i].y > 600) {
                 monsters.splice(i, 1);
@@ -138,6 +164,5 @@ function start() {
         uppdateraBoll();
         requestAnimationFrame(gameloop);
     }
-
     gameloop();
 }

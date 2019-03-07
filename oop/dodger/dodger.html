@@ -12,18 +12,22 @@
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="dodger.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+    <link rel="stylesheet" href="tingle.css">
 </head>
 
 <body>
 
     <!-- Knappar för svårighetsgrad på spelet -->
-    <button id="easy" data-speed="500">Easy</button>
-    <button id="hard" data-speed="300">Hard</button>
-    <button id="insane" data-speed="100">INSANE</button>
-
+    <div id="knappar">
+        <button id="easy" data-speed="500">Easy</button>
+        <button id="hard" data-speed="300">Hard</button>
+        <button id="insane" data-speed="100">INSANE</button>
+    </div>
     <canvas id="myCanvas" width="800" height="600"></canvas>
 
     <script src="dodger.js"></script>
+    <script src="tingle.js"></script>
 </body>
 
 

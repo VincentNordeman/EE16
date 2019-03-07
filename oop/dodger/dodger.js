@@ -24,16 +24,24 @@ function start() {
     var interval = null;
     var startTid;
     var speed = 500;
-    var exit = null;
+    var pause = false;
 
     /* Lyssna på knapparna */
     easy.addEventListener("click", nyttSpel);
     hard.addEventListener("click", nyttSpel);
     insane.addEventListener("click", nyttSpel);
 
+    function reset() {
+        boll.x = 400;
+        boll.y = 500;
+        monsters = [];
+    }
+
     function nyttSpel() {
         reset();
         speed = this.dataset.speed;
+        console.log("speed=" + speed);
+        console.log(monsters);
 
         startTid = Date.now();
         lives = 3;
@@ -41,8 +49,8 @@ function start() {
         clearInterval(interval);
         interval = setInterval(monsterLager, speed);
 
-        window.cancelAnimationFrame(exit);
-        exit = window.requestAnimationFrame(gameloop);
+        pause = false;
+        gameloop();
     }
 
     // instanciate new modal
@@ -65,14 +73,6 @@ function start() {
             return false; // nothing happens
         }
     });
-
-
-    function reset() {
-        boll.x = 400;
-        boll.y = 500;
-
-        monsters = [];
-    }
 
     class Monster {
         constructor() {
@@ -99,7 +99,6 @@ function start() {
             this.y += this.v;
             this.ritaMonster(this.x);
         }
-
     }
 
     /* Rita boll */
@@ -152,7 +151,7 @@ function start() {
         }
         if (lives <= 0) {
             console.log("lives == 0");
-            
+
             /*  alert("You survived for " + points + " seconds"); */
             // Vad som ska stå i modal
             modal.setContent('<h1>You survived for ' + points + ' seconds</h1>');
@@ -163,7 +162,7 @@ function start() {
                 modal.close();
             });
             modal.open();
-            window.cancelAnimationFrame(exit);
+            pause = true; //to stop it
 
         } else {
             var tid = Date.now();
@@ -184,6 +183,7 @@ function start() {
     interval = setInterval(monsterLager, speed);
 
     function gameloop() {
+
         /* Sudda bort allt */
         ctx.clearRect(0, 0, 800, 600);
 
@@ -201,6 +201,7 @@ function start() {
         uppdateraBoll();
         traff();
 
-        exit = window.requestAnimationFrame(gameloop);
+        if (pause) return;
+        requestAnimationFrame(gameloop);
     }
 }

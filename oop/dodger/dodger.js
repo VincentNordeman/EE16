@@ -38,10 +38,10 @@ function start() {
     }
 
     function nyttSpel() {
-        reset();
-        speed = this.dataset.speed;
-        console.log("speed=" + speed);
-        console.log(monsters);
+        if (pause) {
+            reset();
+            speed = this.dataset.speed;
+        }
 
         startTid = Date.now();
         lives = 3;
@@ -50,29 +50,8 @@ function start() {
         interval = setInterval(monsterLager, speed);
 
         pause = false;
-        gameloop();
+        requestAnimationFrame(gameloop);
     }
-
-    // instanciate new modal
-    var modal = new tingle.modal({
-        footer: true,
-        stickyFooter: false,
-        closeMethods: ['overlay', 'button', 'escape'],
-        closeLabel: "Close",
-        cssClass: ['custom-class-1', 'custom-class-2'],
-        onOpen: function () {
-            console.log('modal open');
-        },
-        onClose: function () {
-            console.log('modal closed');
-        },
-        beforeClose: function () {
-            // here's goes some logic
-            // e.g. save content before closing the modal
-            return true; // close the modal
-            return false; // nothing happens
-        }
-    });
 
     class Monster {
         constructor() {
@@ -150,20 +129,11 @@ function start() {
             }
         }
         if (lives <= 0) {
-            console.log("lives == 0");
-
-            /*  alert("You survived for " + points + " seconds"); */
-            // Vad som ska stå i modal
-            modal.setContent('<h1>You survived for ' + points + ' seconds</h1>');
-
-            // Lägg till en knapp med innehåll.
-            modal.addFooterBtn('Try Again', 'tingle-btn tingle-btn--primary', function () {
-                // here goes some logic
-                modal.close();
+            pause = true;
+            swal({
+                title: "Great!",
+                text: "You survived for " + points + " seconds",
             });
-            modal.open();
-            pause = true; //to stop it
-
         } else {
             var tid = Date.now();
             points = Math.ceil((tid - startTid) / 1000);
@@ -201,7 +171,9 @@ function start() {
         uppdateraBoll();
         traff();
 
-        if (pause) return;
+        if (pause) {
+            return;
+        }
         requestAnimationFrame(gameloop);
     }
 }

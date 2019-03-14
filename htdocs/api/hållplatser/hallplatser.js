@@ -19,9 +19,40 @@ function start() {
         alert("FEL");
     }
 
-    function showLocation() {
+    function showLocation(position) {
         var lat = position.coords.latitude;
         var lon = position.coords.longitude;
-        alert("Din position är: " + lat + ", " + lon);
+        console.log("Din position är: " + lat + ", " + lon);
+
+        /* Lägg till position själv */
+        lat = 59.316735;
+        lon = 17.998856;
+
+        /* Omvadla data till post-data */
+        var postData = new FormData();
+        postData.append("lat", lat);
+        postData.append("lon", lon);
+
+        /* Skicka data till ett php script */
+        var ajax = new XMLHttpRequest();
+        ajax.open("POST", "hallplatser.php", true);
+        ajax.send(postData);
+
+        ajax.addEventListener("loadend", visaStop);
+
+        function visaStop() {
+            var stopJson = this.responseText
+            console.log(stopJson);
+
+            var stops = JSON.parse(stopsJson);
+
+            stops.forEach(stop => {
+                console.log("Hållplats: ", stop[0], stop[1], [2]);
+
+                var marker = new mapboxgl.Marker()
+                    .setLngLat([stop[1], stop[2]])
+                    .addTo(map);
+            });
+        }
     }
 }

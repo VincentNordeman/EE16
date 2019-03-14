@@ -22,7 +22,7 @@ ul {
     padding: 0;
 }
 
-img{
+img {
     width: 60px;
 }
 
@@ -40,6 +40,6 @@ tr:nth-child(odd) {
     background: #FFF;
 }
 
-.form{
+.form {
     display: flex;
 }

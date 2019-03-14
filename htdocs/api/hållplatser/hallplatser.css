@@ -58,3 +58,12 @@ button {
 button:hover {
     cursor: pointer;
 }
+
+.marker {
+    background-image: url("./bilder/Choice_toxicity_icon.png");
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}

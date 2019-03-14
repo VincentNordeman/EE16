@@ -1,16 +1,24 @@
 window.onload = start;
 
 function start() {
+
+    /* Lägg till position själv */
+    var lat = 59.316735;
+    var lon = 17.998856;
+
     mapboxgl.accessToken = 'pk.eyJ1IjoidmluY2VudG5vcmRlbWFuIiwiYSI6ImNqcGpvZDFmYTA4Ym0zcHFkMTQ0ZGtxM3YifQ.h6k8Y7CGTDvNoGwEKwNUyA';
     let map = new mapboxgl.Map({
         container: 'map', // container id
         style: 'mapbox://styles/vincentnordeman/cjpjoquzz0f2u2rs3zkr6zlyx', // stylesheet location
-        center: [18.07, 59.33], // starting position [lng, lat]
-        zoom: 10 // starting zoom
+        center: [lon, lat], // starting position [lng, lat]
+        zoom: 15 // starting zoom
     });
 
-    var marker = new mapboxgl.Marker()
-        .setLngLat([18.1, 59.33])
+    /* Skapa en special marker ikon för hem */
+    var hem = document.createElement("div");
+    hem.className = "marker";
+    var marker = new mapboxgl.Marker(hem)
+        .setLngLat([lon, lat])
         .addTo(map);
 
     if (navigator.geolocation) {
@@ -20,13 +28,9 @@ function start() {
     }
 
     function showLocation(position) {
-        var lat = position.coords.latitude;
+        /*  var lat = position.coords.latitude;
         var lon = position.coords.longitude;
-        console.log("Din position är: " + lat + ", " + lon);
-
-        /* Lägg till position själv */
-        lat = 59.316735;
-        lon = 17.998856;
+        console.log("Din position är: " + lat + ", " + lon); */
 
         /* Omvadla data till post-data */
         var postData = new FormData();
@@ -42,15 +46,20 @@ function start() {
 
         function visaStop() {
             var stopJson = this.responseText
-            console.log(stopJson);
-
-            var stops = JSON.parse(stopsJson);
+            var stops = JSON.parse(this.responseText);
 
             stops.forEach(stop => {
                 console.log("Hållplats: ", stop[0], stop[1], [2]);
 
+                /* Skapa en popup */
+                var popup = new mapboxgl.Popup({
+                        offset: 25
+                    })
+                    .setText(stop[0]);
+
                 var marker = new mapboxgl.Marker()
-                    .setLngLat([stop[1], stop[2]])
+                    .setLngLat([stop[2], stop[1]])
+                    .setPopup(popup)
                     .addTo(map);
             });
         }

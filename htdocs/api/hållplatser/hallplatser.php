@@ -13,7 +13,7 @@ if (isset($_POST["lat"]) && isset($_POST["lon"])) {
     /* Api Nyckel */
     $api = "5a04359da47042b7837f88a5c61908c9";
     /* Radie för hållplatser */
-    $radius = 500;
+    $radius = 1000;
     /* Max antal hållplatser */
     $max = 50;
     $url = "http://api.sl.se/api2/nearbystops.json?key=$api&originCoordLat=$lat&originCoordLong=$lon&maxresults=$max&radius=$radius";
@@ -35,10 +35,9 @@ if (isset($_POST["lat"]) && isset($_POST["lon"])) {
         $stops[] = [$name, $lat, $lon];
     }
     
-    echo json_decode($stops);
+    echo json_encode($stops);
 } else {
     echo "Något gick fel";
 }
 
 ?>
-<script src="hallplatser.js"></script>

@@ -22,7 +22,7 @@ function start() {
         let rabbat = Number(eRabbat.value);
         let total = vara1 + vara2 + frakt;
 
-/* Om rabbat koden är "5599", ta "total" minus 29 */
+        /* Om rabbat koden är "5599", ta "total" minus 29 */
         if (rabbat == "5599") {
             total = total - 29;
         }
